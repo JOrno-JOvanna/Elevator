@@ -6,8 +6,9 @@ namespace ElevatorConsole
     internal class ElevatorCabin
     {
         public int CurrentFloor { get; set; }
-        private ElevatorState state; 
-
+        private ElevatorState state;
+        public int Number { get; set; }
+        public bool isMoving { get; set; }
         public ElevatorState State
         {
             get => state;
@@ -64,6 +65,7 @@ namespace ElevatorConsole
 
         public void CabinMoving(int floor)
         {
+            isMoving = true;
             // Метод для обработки движения кабины между дверьми
             if(CurrentFloor < floor)
             {
@@ -77,6 +79,7 @@ namespace ElevatorConsole
                 CurrentFloor = floor;
                 State = ElevatorState.DoorsOpening;
                 State = ElevatorState.DoorsOpened;
+                CabinStopped();
             }
             else if(CurrentFloor > floor)
             {
@@ -90,6 +93,7 @@ namespace ElevatorConsole
                 CurrentFloor = floor;
                 State = ElevatorState.DoorsOpening;
                 State = ElevatorState.DoorsOpened;
+                CabinStopped();
             }
             else if(CurrentFloor == floor)
             {
@@ -101,7 +105,7 @@ namespace ElevatorConsole
         public void CabinStopped()
         {
             // Метод для обработки остановки кабины
-
+            isMoving = false;
         }
     }
 
